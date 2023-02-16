@@ -1,9 +1,12 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../ domain/type.dart';
 import '../../../../core/widgets/loading_widget.dart';
 import '../../../../injection_container.dart' as di;
 import '../../../../core/widgets/message_display_widget.dart';
+import '../CheckBoxBloc/CheckerCubit.dart';
 import '../bloc/add_chat_bloc.dart';
 import '../bloc/add_chat_event.dart';
 import '../bloc/add_chat_state.dart';
@@ -16,6 +19,7 @@ class ChatScreen extends StatelessWidget {
   ChatScreen({required this.uid, required this.name});
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: Column(
@@ -28,11 +32,13 @@ class ChatScreen extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Text(
-              'online',
-              style: TextStyle(
-                fontSize: 10.0,
-                // fontWeight: FontWeight.bold,
+            BlocProvider(
+              create: (context) => CheckerCubit0(this.uid)..getDataFromFirebase(uid),
+              child: BlocBuilder<CheckerCubit0, String>(
+                builder: (context, state) {
+                  print('state$state');
+                  return Text(state,style: TextStyle(fontSize: 10),);
+                },
               ),
             ),
           ],

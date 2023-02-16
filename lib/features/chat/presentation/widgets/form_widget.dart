@@ -32,7 +32,6 @@ class MessageComposer extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.send),
             iconSize: 25.0,
-            // color: Theme.of(context).primaryColor,
             onPressed: () {
               try {
                 final sick = ChatEntities(
@@ -45,7 +44,6 @@ class MessageComposer extends StatelessWidget {
               } catch (e) {
                 print(e);
               }
-              print(uid);
             },
           ),
         ],

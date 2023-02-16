@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,6 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'features/auth/data/datasources/online_not_online.dart';
 import 'features/auth/presentation/ pages/LoginPage.dart';
 import 'features/auth/presentation/eyesBloc/CheckerCubit.dart';
+import 'features/chat/ domain/type.dart';
+import 'features/chat/presentation/CheckBoxBloc/CheckerCubit.dart';
 import 'features/home/presentation/ pages/get_all_weight.dart';
 import 'features/home/presentation/bloc/add_weight_bloc.dart';
 import 'firebase_options.dart';
@@ -17,6 +20,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  // print(type().action());
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -43,14 +47,16 @@ class _MyApp extends State<MyApp> with WidgetsBindingObserver {
 
   @override
   void initState() {
+    WidgetsBinding.instance.addObserver(this);
+
     // TODO: implement initState
     super.initState();
-    WidgetsBinding.instance.addObserver(this);
   }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
+    print(state);
     switch (state) {
       case AppLifecycleState.resumed:
         OnlineNotOnline().changeStatusToBeOnline();
@@ -78,6 +84,8 @@ class _MyApp extends State<MyApp> with WidgetsBindingObserver {
           BlocProvider(create: (_) => di.sl<AddUpdateGetWeightBloc>()),
           BlocProvider(
             create: (_) => CheckerCubit(),
+          ),BlocProvider(
+            create: (_) => CheckerCubit0(''),
           ),
         ],
         child: MaterialApp(

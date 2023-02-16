@@ -33,10 +33,11 @@ class WeightRemoteDataSourceImple extends WeightRemoteDataSource {
   Future<Unit> logOut() async {
     // TODO: implement logOut
     try {
+
+      OnlineNotOnline().changeStatusToBeOffline();
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('uid', 'null');
       prefs.setBool('login', false);
-      OnlineNotOnline().changeStatusToBeOffline();
 
       return Future.value(unit);
     } catch (e) {
