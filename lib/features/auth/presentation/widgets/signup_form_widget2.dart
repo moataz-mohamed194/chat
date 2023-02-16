@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../ pages/AuthenticationPhoneNumber.dart';
-import '../ pages/CreateAccountPage.dart';
 import '../../ domain/entities/login.dart';
 import '../../ domain/validation/validator.dart';
 import '../../../../core/widgets/ButtonWidget.dart';
@@ -79,21 +77,21 @@ class SignUpFormWidget extends StatelessWidget {
 
   void validateFormThenUpdateOrAddPost(BuildContext context) {
     final isValid = _formKey.currentState!.validate();
-    // if (isValid ) {
-    // final login = Login(
-    //     email: _emailController.text.toString(),
-    //     password: _passwordController.text.toString(),
-    //     name: _nameController.text.toString(),
-    //     phoneNumber: _phoneNumberController.text.toString());
+    if (isValid ) {
     final login = Login(
-        email: "mmmm@mmm.com",
-        password: "1234567890",
-        name: "moataz mohamed",
-        phoneNumber: "1289555089");
+        email: _emailController.text.toString(),
+        password: _passwordController.text.toString(),
+        name: _nameController.text.toString(),
+        phoneNumber: _phoneNumberController.text.toString());
+    // final login = Login(
+    //     email: "mmmm@mmm.com",
+    //     password: "1234567890",
+    //     name: "moataz mohamed",
+    //     phoneNumber: "1289555089");
     BlocProvider.of<LoginBloc>(context).add(AddUserEvent(login: login));
 
     // Navigator.of(context)
     //     .push(MaterialPageRoute(builder: (_) => AuthenticationPhoneNumber(login: login)));
-    // }
+    }
   }
 }

@@ -5,7 +5,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../ domain/entities/login.dart';
 import '../../../../core/error/Exception.dart';
-import '../../../../core/string/basic.dart';
 
 String verification = '';
 

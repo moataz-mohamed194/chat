@@ -1,13 +1,8 @@
-import 'dart:convert';
-
 import 'package:dartz/dartz.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../ domain/entities/weight.dart';
 import '../../../../core/error/Exception.dart';
 import '../../../auth/data/datasources/online_not_online.dart';
-import '../models/weight_Model.dart';
 
 abstract class WeightRemoteDataSource {
   Future<Map?> getWeight();
@@ -47,6 +42,5 @@ class WeightRemoteDataSourceImple extends WeightRemoteDataSource {
     } catch (e) {
       throw OfflineException();
     }
-    throw UnimplementedError();
   }
 }

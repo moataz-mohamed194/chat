@@ -10,12 +10,12 @@ import 'features/auth/ domain/usecases/vilification_phone.dart';
 import 'features/auth/data/datasources/login_remote_date_source.dart';
 import 'features/auth/data/repositories/login_repositories.dart';
 import 'features/auth/presentation/bloc/login_bloc.dart';
-import 'features/chat/ domain/repositories/Sick_repositorie.dart';
-import 'features/chat/ domain/usecases/add _sick.dart';
-import 'features/chat/ domain/usecases/get_all_sicks.dart';
-import 'features/chat/data/datasources/sick_remote_data_source.dart';
-import 'features/chat/data/repositories/sick_repositories.dart';
-import 'features/chat/presentation/bloc/add_sick_bloc.dart';
+import 'features/chat/ domain/repositories/Chat_repositorie.dart';
+import 'features/chat/ domain/usecases/add _message.dart';
+import 'features/chat/ domain/usecases/get_all_message.dart';
+import 'features/chat/data/datasources/chat_remote_data_source.dart';
+import 'features/chat/data/repositories/Chat_repositories.dart';
+import 'features/chat/presentation/bloc/add_chat_bloc.dart';
 import 'features/home/ domain/repositories/weight_repositorie.dart';
 import 'features/home/ domain/usecases/get_all_weight.dart';
 import 'features/home/data/datasources/weight_remote_data_source.dart';
@@ -31,7 +31,7 @@ Future<void> init() async {
       vilificationPhoneUseMethod: sl()));
   sl.registerFactory(
       () => AddUpdateGetWeightBloc(getAllWeight: sl(), logOut: sl()));
-  sl.registerFactory(() => AddUpdateGetSickBloc(addSick: sl(), getSick: sl()));
+  sl.registerFactory(() => AddUpdateGetChatBloc(addSick: sl(), getSick: sl()));
 
   //UseCase
   sl.registerLazySingleton(() => VilificationPhoneUseCases(sl()));
@@ -39,14 +39,14 @@ Future<void> init() async {
   sl.registerLazySingleton(() => LoginUseCases(sl()));
   sl.registerLazySingleton(() => GetAllUseCases(sl()));
   sl.registerLazySingleton(() => LogOutUseCases(sl()));
-  sl.registerLazySingleton(() => AddSick(sl()));
-  sl.registerLazySingleton(() => GetAllSick(sl()));
+  sl.registerLazySingleton(() => AddMessage(sl()));
+  sl.registerLazySingleton(() => GetAllMessage(sl()));
 
   //Repository
   sl.registerLazySingleton<LoginRepositorie>(
       () => LoginRepositoriesImpl(remoteDataSource: sl(), networkInfo: sl()));
-  sl.registerLazySingleton<SickRepository>(
-      () => SickRepositoriesImpl(remoteDataSource: sl(), networkInfo: sl()));
+  sl.registerLazySingleton<ChatRepository>(
+      () => MessageRepositoriesImpl(remoteDataSource: sl(), networkInfo: sl()));
   sl.registerLazySingleton<WeightRepository>(
       () => WeightRepositoriesImpl(remoteDataSource: sl(), networkInfo: sl()));
 
@@ -56,8 +56,8 @@ Future<void> init() async {
       () => LoginRemoteDataSourceImple());
   sl.registerLazySingleton<WeightRemoteDataSource>(
       () => WeightRemoteDataSourceImple());
-  sl.registerLazySingleton<SickRemoteDataSource>(
-      () => SickRemoteDataSourceImple());
+  sl.registerLazySingleton<ChatRemoteDataSource>(
+      () => ChatRemoteDataSourceImple());
 
   //Core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));

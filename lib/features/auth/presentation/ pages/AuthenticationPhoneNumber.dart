@@ -1,18 +1,15 @@
-import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/util/snackbar_message.dart';
-import '../../../../core/widgets/loading_widget.dart';
-import '../../../../injection_container.dart' as di;
 
 import '../../ domain/entities/login.dart';
 import '../../../../core/widgets/ButtonWidget.dart';
 import '../../../../core/widgets/TextFormFieldWidgets.dart';
 import '../../data/datasources/login_remote_date_source.dart';
 import '../bloc/login_bloc.dart';
-import '../bloc/login_event.dart';
 import '../bloc/login_state.dart';
 
 class AuthenticationPhoneNumber extends StatelessWidget {

@@ -1,12 +1,10 @@
 import 'package:dartz/dartz.dart';
 
-import '../../ domain/entities/weight.dart';
 import '../../ domain/repositories/weight_repositorie.dart';
 import '../../../../core/error/Exception.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/network/network_info.dart';
 import '../datasources/weight_remote_data_source.dart';
-import '../models/weight_Model.dart';
 
 class WeightRepositoriesImpl implements WeightRepository {
   final WeightRemoteDataSource remoteDataSource;

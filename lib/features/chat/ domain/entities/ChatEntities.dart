@@ -1,12 +1,12 @@
 import 'package:equatable/equatable.dart';
 
-class Sick extends Equatable {
+class ChatEntities extends Equatable {
   final int? id;
   final bool you;
   final String meg;
   final String? toWho;
 
-  Sick({this.id, required this.you, required this.meg, this.toWho});
+  ChatEntities({this.id, required this.you, required this.meg, this.toWho});
 
   @override
   List<Object?> get props => [id, you, meg];

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../ domain/entities/sick.dart';
-import '../bloc/add_sick_bloc.dart';
-import '../bloc/add_sick_event.dart';
+import '../../ domain/entities/ChatEntities.dart';
+import '../bloc/add_chat_bloc.dart';
+import '../bloc/add_chat_event.dart';
 
 class MessageComposer extends StatelessWidget {
   final String uid;
@@ -35,13 +35,13 @@ class MessageComposer extends StatelessWidget {
             // color: Theme.of(context).primaryColor,
             onPressed: () {
               try {
-                final sick = Sick(
+                final sick = ChatEntities(
                     id: 0,
                     you: true,
                     meg: _textEditingController.text,
                     toWho: uid);
-                BlocProvider.of<AddUpdateGetSickBloc>(context)
-                    .add(AddSickEvent(sick: sick));
+                BlocProvider.of<AddUpdateGetChatBloc>(context)
+                    .add(AddMessageEvent(meg: sick));
               } catch (e) {
                 print(e);
               }

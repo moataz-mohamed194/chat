@@ -1,26 +1,26 @@
 import 'package:dartz/dartz.dart';
 
-import '../../ domain/entities/sick.dart';
-import '../../ domain/repositories/Sick_repositorie.dart';
+import '../../ domain/entities/ChatEntities.dart';
+import '../../ domain/repositories/Chat_repositorie.dart';
 import '../../../../core/error/Exception.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/network/network_info.dart';
-import '../datasources/sick_remote_data_source.dart';
-import '../models/SickModel.dart';
+import '../datasources/chat_remote_data_source.dart';
+import '../models/ChatModel.dart';
 
-class SickRepositoriesImpl implements SickRepository {
-  final SickRemoteDataSource remoteDataSource;
+class MessageRepositoriesImpl implements ChatRepository {
+  final ChatRemoteDataSource remoteDataSource;
   final NetworkInfo networkInfo;
 
-  SickRepositoriesImpl(
+  MessageRepositoriesImpl(
       {required this.remoteDataSource, required this.networkInfo});
   @override
-  Future<Either<Failures, Unit>> addSick(Sick sick) async {
-    final SickModel sickModel =
-        SickModel(id: sick.id, you: sick.you, meg: sick.meg, toWho: sick.toWho);
+  Future<Either<Failures, Unit>> addMessage(ChatEntities meg) async {
+    final MessageModel megModel =
+        MessageModel(id: meg.id, you: meg.you, meg: meg.meg, toWho: meg.toWho);
     if (await networkInfo.isConnected) {
       try {
-        await remoteDataSource.addSick(sickModel);
+        await remoteDataSource.addMeg(megModel);
         return Right(unit);
       } on OfflineException {
         return Left(OfflineFailures());
@@ -31,10 +31,10 @@ class SickRepositoriesImpl implements SickRepository {
   }
 
   @override
-  Future<Either<Failures, List<Sick>>> getAllSick(String toWho) async {
+  Future<Either<Failures, List<ChatEntities>>> getAllMessages(String toWho) async {
     if (await networkInfo.isConnected) {
       try {
-        final currentSick = await remoteDataSource.getSick(toWho);
+        final currentSick = await remoteDataSource.getMeg(toWho);
         return Right(currentSick);
       } on OfflineException {
         return Left(OfflineFailures());

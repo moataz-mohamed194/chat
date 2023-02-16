@@ -4,10 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/widgets/loading_widget.dart';
 import '../../../../injection_container.dart' as di;
 import '../../../../core/widgets/message_display_widget.dart';
-import '../bloc/add_sick_bloc.dart';
-import '../bloc/add_sick_event.dart';
-import '../bloc/add_sick_state.dart';
-import '../widgets/Sick_list_widget.dart';
+import '../bloc/add_chat_bloc.dart';
+import '../bloc/add_chat_event.dart';
+import '../bloc/add_chat_state.dart';
+import '../widgets/Chat_list_widget.dart';
 
 class ChatScreen extends StatelessWidget {
   final String name;
@@ -46,22 +46,29 @@ class ChatScreen extends StatelessWidget {
   Widget _buildBody() {
     return Padding(
         padding: EdgeInsets.only(top: 10),
-        child: BlocProvider<AddUpdateGetSickBloc>(
-            create: (context) => di.sl<AddUpdateGetSickBloc>()
-              ..add(GetSickEvent(
+        child: BlocProvider<AddUpdateGetChatBloc>(
+            create: (context) => di.sl<AddUpdateGetChatBloc>()
+              ..add(GetMessagesEvent(
                 toWho: uid,
               )),
-            child: BlocBuilder<AddUpdateGetSickBloc, AddUpdateGetSickState>(
+            child: BlocBuilder<AddUpdateGetChatBloc, AddUpdateGetChatState>(
               builder: (context, state) {
-                print(state);
-                if (state is LoadingSicksState) {
+
+                if (state is LoadingState) {
                   return LoadingWidget();
-                } else if (state is LoadedSicksState) {
+                } else if (state is LoadedState) {
                   return RefreshIndicator(
                       onRefresh: () => _onRefresh(context),
-                      child: SickListWidget(sick: state.sicks, uid: uid));
-                } else if (state is ErrorSicksState) {
+                      child: ChatListWidget(sick: state.sicks, uid: uid));
+                } else if (state is ErrorState) {
                   return MessageDisplayWidget(message: state.message);
+                }else if (state is MessageAddUpdateGetState) {
+                  di.sl<AddUpdateGetChatBloc>()
+                    .add(GetMessagesEvent(
+                      toWho: uid,
+                    ));
+                  // Navigator.pop(context);
+                  return Container();
                 }
                 return LoadingWidget();
               },
@@ -70,8 +77,8 @@ class ChatScreen extends StatelessWidget {
 
   _onRefresh(BuildContext context) async {
     try {
-      BlocProvider.of<AddUpdateGetSickBloc>(context)
-          .add(RefreshSickEvent(toWho: uid));
+      BlocProvider.of<AddUpdateGetChatBloc>(context)
+          .add(RefreshMessagesEvent(toWho: uid));
     } catch (e) {
       print(e);
     }

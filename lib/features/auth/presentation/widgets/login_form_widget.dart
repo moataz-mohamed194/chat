@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../ pages/CreateAccountPage.dart';
 import '../../ domain/entities/login.dart';
 import '../../ domain/validation/validator.dart';
 import '../../../../core/widgets/ButtonWidget.dart';

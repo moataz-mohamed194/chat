@@ -1,12 +1,9 @@
-import 'dart:io';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'features/auth/data/datasources/online_not_online.dart';
-import 'features/auth/presentation/ pages/AuthenticationPhoneNumber.dart';
 import 'features/auth/presentation/ pages/LoginPage.dart';
 import 'features/auth/presentation/eyesBloc/CheckerCubit.dart';
 import 'features/home/presentation/ pages/get_all_weight.dart';

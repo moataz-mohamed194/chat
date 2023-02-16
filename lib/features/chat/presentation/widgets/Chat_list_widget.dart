@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../ domain/entities/sick.dart';
+import '../../ domain/entities/ChatEntities.dart';
 import 'form_widget.dart';
 
-class SickListWidget extends StatelessWidget {
-  final List<Sick> sick;
+class ChatListWidget extends StatelessWidget {
+  final List<ChatEntities> sick;
   final String uid;
 
-  const SickListWidget({Key? key, required this.sick, required this.uid})
+  const ChatListWidget({Key? key, required this.sick, required this.uid})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -18,7 +17,6 @@ class SickListWidget extends StatelessWidget {
           child: ListView.separated(
             itemCount: sick.length,
             itemBuilder: (context, index) {
-              print(sick[index]);
               return Column(
                 children: <Widget>[
                   Container(

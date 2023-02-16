@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../ domain/usecases/get_all_weight.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/string/failures.dart';
-import '../../../../core/string/messages.dart';
 import 'add_weight_event.dart';
 import 'add_weight_state.dart';
 
