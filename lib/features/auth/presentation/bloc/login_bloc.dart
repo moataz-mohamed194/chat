@@ -15,7 +15,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final CreateUseCases createUseMethod;
   final VilificationPhoneUseCases vilificationPhoneUseMethod;
 
-  LoginBloc({required this.loginMethod, required this.createUseMethod, required this.vilificationPhoneUseMethod})
+  LoginBloc(
+      {required this.loginMethod,
+      required this.createUseMethod,
+      required this.vilificationPhoneUseMethod})
       : super(LoginInitial()) {
     on<LoginEvent>((event, emit) async {
       if (event is LoginMethodEvent) {
@@ -28,9 +31,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         final failureOrDoneMessage = await createUseMethod(event.login);
         emit(_mapFailureOrPostsToStateForAdd(
             failureOrDoneMessage, ADD_SUCCESS_MESSAGE));
-      }else if (event is VerificationUserEvent) {
+      } else if (event is VerificationUserEvent) {
         emit(LoadingVerificationState());
-        final failureOrDoneMessage = await vilificationPhoneUseMethod(event.login);
+        final failureOrDoneMessage =
+            await vilificationPhoneUseMethod(event.login);
         emit(_mapFailureOrPostsToStateForAdd(
             failureOrDoneMessage, ADD_SUCCESS_MESSAGE));
       }

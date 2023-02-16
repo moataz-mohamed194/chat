@@ -28,6 +28,7 @@ class AddUserEvent extends LoginEvent {
   @override
   List<Object> get props => [login];
 }
+
 class VerificationUserEvent extends LoginEvent {
   final Login login;
 

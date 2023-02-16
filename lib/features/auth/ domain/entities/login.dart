@@ -11,8 +11,8 @@ class Login extends Equatable {
       {required this.email,
       required this.password,
       this.name,
-        this.code,
+      this.code,
       this.phoneNumber});
   @override
-  List<Object?> get props => [email, password, name, phoneNumber,code];
+  List<Object?> get props => [email, password, name, phoneNumber, code];
 }

@@ -32,8 +32,11 @@ class LoginRepositoriesImpl extends LoginRepositorie {
 
   @override
   Future<Either<Failures, Unit>> createAccountMethod(Login login) async {
-    final LoginMethod loginMethod =
-        LoginMethod(email: login.email, password: login.password,name: login.name, phoneNumber: login.phoneNumber);
+    final LoginMethod loginMethod = LoginMethod(
+        email: login.email,
+        password: login.password,
+        name: login.name,
+        phoneNumber: login.phoneNumber);
     if (await networkInfo.isConnected) {
       try {
         await remoteDataSource.createAccountMethod(loginMethod);
@@ -48,8 +51,11 @@ class LoginRepositoriesImpl extends LoginRepositorie {
 
   @override
   Future<Either<Failures, Unit>> vilificationPhoneMethod(Login login) async {
-    final LoginMethod loginMethod =
-    LoginMethod(email: login.email, password: login.password,name: login.name, phoneNumber: login.phoneNumber);
+    final LoginMethod loginMethod = LoginMethod(
+        email: login.email,
+        password: login.password,
+        name: login.name,
+        phoneNumber: login.phoneNumber);
     if (await networkInfo.isConnected) {
       try {
         await remoteDataSource.vilificationPhoneMethod(loginMethod);

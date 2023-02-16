@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>NSSMSMessageUsageDescription</key>
+    <string>app-1-326621224329-ios-1da9170f2b4e29dcb99558</string>
 	<key>CFBundleDisplayName</key>
 	<string>Chat</string>
 	<key>CFBundleExecutable</key>

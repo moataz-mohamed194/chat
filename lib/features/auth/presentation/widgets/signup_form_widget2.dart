@@ -43,11 +43,11 @@ class SignUpFormWidget extends StatelessWidget {
             keyboardType: TextInputType.phone,
             controler: _phoneNumberController,
             rightWidget: IconButton(
-            icon: const Icon(Icons.clear),
-            onPressed: () {
-              _phoneNumberController.clear();
-            },
-          ),
+              icon: const Icon(Icons.clear),
+              onPressed: () {
+                _phoneNumberController.clear();
+              },
+            ),
             validatorTextField: (val) => Validator().validatorPhoneNumber(val),
           ),
           BlocBuilder<CheckerCubit, bool>(
@@ -80,20 +80,20 @@ class SignUpFormWidget extends StatelessWidget {
   void validateFormThenUpdateOrAddPost(BuildContext context) {
     final isValid = _formKey.currentState!.validate();
     // if (isValid ) {
-      // final login = Login(
-      //     email: _emailController.text.toString(),
-      //     password: _passwordController.text.toString(),
-      //     name: _nameController.text.toString(),
-      //     phoneNumber: _phoneNumberController.text.toString());
-      final login = Login(
-          email: "mmm@mmm.com",
-          password: "1234567890",
-          name: "moataz mohamed",
-          phoneNumber: "1289555089");
-      BlocProvider.of<LoginBloc>(context).add(AddUserEvent(login: login));
+    // final login = Login(
+    //     email: _emailController.text.toString(),
+    //     password: _passwordController.text.toString(),
+    //     name: _nameController.text.toString(),
+    //     phoneNumber: _phoneNumberController.text.toString());
+    final login = Login(
+        email: "mmmm@mmm.com",
+        password: "1234567890",
+        name: "moataz mohamed",
+        phoneNumber: "1289555089");
+    BlocProvider.of<LoginBloc>(context).add(AddUserEvent(login: login));
 
-      // Navigator.of(context)
-      //     .push(MaterialPageRoute(builder: (_) => AuthenticationPhoneNumber(login: login)));
+    // Navigator.of(context)
+    //     .push(MaterialPageRoute(builder: (_) => AuthenticationPhoneNumber(login: login)));
     // }
   }
 }

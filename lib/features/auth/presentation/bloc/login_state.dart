@@ -14,6 +14,7 @@ class LoginInitial extends LoginState {}
 class LoadingLoginState extends LoginState {}
 
 class LoadingCreateState extends LoginState {}
+
 class LoadingVerificationState extends LoginState {}
 
 class LoginMethodInitial extends LoginState {}

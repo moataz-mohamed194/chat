@@ -3,11 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/util/snackbar_message.dart';
 import '../../../../core/widgets/loading_widget.dart';
+import '../../../home/presentation/ pages/get_all_weight.dart';
 import '../bloc/login_bloc.dart';
 import '../bloc/login_state.dart';
 import '../widgets/signup_form_widget2.dart';
 import 'AuthenticationPhoneNumber.dart';
-import 'MainUserPage.dart';
 
 class CreateAccountPage extends StatelessWidget {
   @override

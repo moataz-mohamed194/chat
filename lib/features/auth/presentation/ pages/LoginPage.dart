@@ -3,11 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/util/snackbar_message.dart';
 import '../../../../core/widgets/loading_widget.dart';
+import '../../../home/presentation/ pages/get_all_weight.dart';
 import '../bloc/login_bloc.dart';
 import '../bloc/login_state.dart';
 import '../widgets/login_form_widget.dart';
 import 'CreateAccountPage.dart';
-import 'MainUserPage.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -23,13 +23,23 @@ class LoginPage extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-
         Container(
           margin: EdgeInsets.only(top: 10, bottom: 10),
-          child: Column(children: [
-            Text('Welcome back', style: TextStyle(color: Colors.grey, fontSize: 33, fontWeight: FontWeight.bold),),
-            Text('Login to your account', style: TextStyle(color: Colors.grey, ))
-          ],),
+          child: Column(
+            children: [
+              Text(
+                'Welcome back',
+                style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 33,
+                    fontWeight: FontWeight.bold),
+              ),
+              Text('Login to your account',
+                  style: TextStyle(
+                    color: Colors.grey,
+                  ))
+            ],
+          ),
         ),
         BlocConsumer<LoginBloc, LoginState>(
           listener: (context, state) async {
@@ -53,11 +63,14 @@ class LoginPage extends StatelessWidget {
         ),
         Container(
           margin: EdgeInsets.only(top: 10, bottom: 10),
-
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Don't have an account?  ", style: TextStyle(color: Colors.grey,  fontWeight: FontWeight.bold),),
+              Text(
+                "Don't have an account?  ",
+                style:
+                    TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
+              ),
               InkWell(
                 child: Text(
                   'Sign Up',
@@ -67,11 +80,12 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
                 onTap: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (_) => CreateAccountPage()));
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (_) => CreateAccountPage()));
                 },
               ),
-            ],),
+            ],
+          ),
         ),
       ],
       // padding: EdgeInsets.all(10),

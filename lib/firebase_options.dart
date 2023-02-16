@@ -70,7 +70,8 @@ class DefaultFirebaseOptions {
     projectId: 'chat-573b4',
     databaseURL: 'https://chat-573b4-default-rtdb.firebaseio.com',
     storageBucket: 'chat-573b4.appspot.com',
-    iosClientId: '326621224329-kfjqhnp278htiehdsumn2g5dcppf4tip.apps.googleusercontent.com',
+    iosClientId:
+        '326621224329-kfjqhnp278htiehdsumn2g5dcppf4tip.apps.googleusercontent.com',
     iosBundleId: 'com.example.chat',
   );
 
@@ -81,7 +82,8 @@ class DefaultFirebaseOptions {
     projectId: 'chat-573b4',
     databaseURL: 'https://chat-573b4-default-rtdb.firebaseio.com',
     storageBucket: 'chat-573b4.appspot.com',
-    iosClientId: '326621224329-kfjqhnp278htiehdsumn2g5dcppf4tip.apps.googleusercontent.com',
+    iosClientId:
+        '326621224329-kfjqhnp278htiehdsumn2g5dcppf4tip.apps.googleusercontent.com',
     iosBundleId: 'com.example.chat',
   );
 }
