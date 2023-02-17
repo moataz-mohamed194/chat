@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../ domain/entities/login.dart';
 import '../../../../core/error/Exception.dart';
+import 'online_not_online.dart';
 
 String verification = '';
 
@@ -34,6 +35,7 @@ class LoginRemoteDataSourceImple extends LoginRemoteDataSource {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('uid', credential.user!.uid);
       prefs.setBool('login', true);
+      OnlineNotOnline().changeStatusToBeOnline();
 
       return Future.value(unit);
     } catch (e) {
@@ -78,6 +80,7 @@ class LoginRemoteDataSourceImple extends LoginRemoteDataSource {
 
   @override
   Future<Unit> vilificationPhoneMethod(Login login) async {
+    print('vilificationPhoneMethod');
     try {
       final body = {
         'email': login.email.toString(),

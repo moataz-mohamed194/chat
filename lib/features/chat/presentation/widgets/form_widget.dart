@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import '../../../../injection_container.dart' as di;
 import '../../ domain/entities/ChatEntities.dart';
 import '../bloc/add_chat_bloc.dart';
 import '../bloc/add_chat_event.dart';
@@ -41,6 +41,12 @@ class MessageComposer extends StatelessWidget {
                     toWho: uid);
                 BlocProvider.of<AddUpdateGetChatBloc>(context)
                     .add(AddMessageEvent(meg: sick));
+                // CheckerCubit0(this.uid)..getDataFromFirebase(uid)
+                BlocProvider<AddUpdateGetChatBloc>(
+                    create: (context) => di.sl<AddUpdateGetChatBloc>()
+                      ..add(GetMessagesEvent(
+                        toWho: uid,
+                      )));
               } catch (e) {
                 print(e);
               }

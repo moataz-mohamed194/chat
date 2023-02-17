@@ -32,7 +32,7 @@ class CreateAccountPage extends StatelessWidget {
           style: TextStyle(color: Colors.black),
         ),
       ),
-      body: _body(context),
+      body: SingleChildScrollView(child: _body(context)),
     ));
   }
 

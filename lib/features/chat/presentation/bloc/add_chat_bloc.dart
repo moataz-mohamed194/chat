@@ -23,6 +23,7 @@ class AddUpdateGetChatBloc
         final failureOrDoneMessage = await addSick(event.meg);
         emit(_mapFailureOrPostsToStateForAdd(
             failureOrDoneMessage, ADD_SUCCESS_MESSAGE));
+
       } else if (event is GetMessagesEvent) {
         emit(LoadingState());
         final failureOrDoneMessage = await getSick(event.toWho);
