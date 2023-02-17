@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../injection_container.dart' as di;
@@ -50,6 +51,7 @@ class MessageComposer extends StatelessWidget {
               } catch (e) {
                 print(e);
               }
+              FirebaseMessaging messaging = FirebaseMessaging.instance;
             },
           ),
         ],

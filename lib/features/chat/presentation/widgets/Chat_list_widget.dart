@@ -14,28 +14,28 @@ class ChatListWidget extends StatelessWidget {
     return Column(
       children: [
         Expanded(
-          child: ListView.separated(
+          child: ListView.builder(
             itemCount: sick.length,
             itemBuilder: (context, index) {
-              return Column(
-                children: <Widget>[
+              return
                   Container(
+                    width:1  ,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(30.0),
                         topRight: Radius.circular(30.0),
                       ),
+                      color: Colors.black12
                     ),
+                    alignment:sick[index].you ?Alignment.centerRight: Alignment.centerLeft,
                     child: Text(
                       sick[index].meg.toString(),
                       style: TextStyle(
-                          color: sick[index].you ? Colors.green : Colors.red),
+                          color: Colors.green),
                     ),
-                  ),
-                ],
-              );
+                  );
             },
-            separatorBuilder: (context, index) => Divider(thickness: 1),
+            // separatorBuilder: (context, index) => Divider(thickness: 1),
           ),
         ),
         MessageComposer(uid: uid)
