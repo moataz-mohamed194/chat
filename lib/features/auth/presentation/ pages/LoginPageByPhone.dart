@@ -6,11 +6,12 @@ import '../../../../core/widgets/loading_widget.dart';
 import '../../../home/presentation/ pages/get_all_weight.dart';
 import '../bloc/login_bloc.dart';
 import '../bloc/login_state.dart';
+import '../widgets/login_by_phone_form_widget.dart';
 import '../widgets/login_form_widget.dart';
 import 'CreateAccountPage.dart';
-import 'LoginPageByPhone.dart';
+import 'LoginPage.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginByPhonePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -59,7 +60,7 @@ class LoginPage extends StatelessWidget {
             if (state is LoadingLoginState) {
               return LoadingWidget();
             }
-            return LoginFormWidget();
+            return LoginByPhoneFormWidget();
           },
         ),
         Container(
@@ -90,7 +91,7 @@ class LoginPage extends StatelessWidget {
         ),
         InkWell(
           child: Text(
-            'Login by phone number',
+            'Login by email',
             style: TextStyle(
               color: Color(0xff5C027E),
               // decoration: TextDecoration.underline,
@@ -98,7 +99,7 @@ class LoginPage extends StatelessWidget {
           ),
           onTap: () {
             Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => LoginByPhonePage()));
+                MaterialPageRoute(builder: (_) => LoginPage()));
           },
         ),
       ],

@@ -75,7 +75,7 @@ class ChatScreen extends StatelessWidget {
                 } else if (state is MessageAddUpdateGetState || state is LoadedState) {
                   return StreamBuilder(
                       stream: FirebaseDatabase.instance
-                          .ref('$myId/messages/$uid')
+                          .ref('$myId/messages/$uid').orderByKey()
                           .onValue,
                       builder: (BuildContext context,
                           AsyncSnapshot<dynamic> snapshot) {

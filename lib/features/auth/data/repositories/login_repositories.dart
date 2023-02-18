@@ -1,3 +1,4 @@
+import 'package:chat/features/auth/%20domain/usecases/login_by_phone_usecases.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../ domain/entities/login.dart';
@@ -59,6 +60,23 @@ class LoginRepositoriesImpl extends LoginRepositorie {
     if (await networkInfo.isConnected) {
       try {
         await remoteDataSource.vilificationPhoneMethod(loginMethod);
+        return Right(unit);
+      } catch (e) {
+        return Left(FailuresLoginFailures());
+      }
+    } else {
+      return Left(OfflineFailures());
+    }
+  }
+
+  @override
+  Future<Either<Failures, Unit>> loginByPhoneMethod(Login login) async {
+    final LoginMethod loginMethod =
+    LoginMethod(phoneNumber: login.phoneNumber, password: login.password, email: '');
+    if (await networkInfo.isConnected) {
+      try {
+        print("login: $login");
+        await remoteDataSource.loginByPhoneMethod(loginMethod);
         return Right(unit);
       } catch (e) {
         return Left(FailuresLoginFailures());

@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'core/network/network_info.dart';
 import 'features/auth/ domain/repositories/Login_repositorie.dart';
 import 'features/auth/ domain/usecases/create_user.dart';
+import 'features/auth/ domain/usecases/login_by_phone_usecases.dart';
 import 'features/auth/ domain/usecases/login_usecases.dart';
 import 'features/auth/ domain/usecases/vilification_phone.dart';
 import 'features/auth/data/datasources/login_remote_date_source.dart';
@@ -28,7 +29,7 @@ Future<void> init() async {
   sl.registerFactory(() => LoginBloc(
       loginMethod: sl(),
       createUseMethod: sl(),
-      vilificationPhoneUseMethod: sl()));
+      vilificationPhoneUseMethod: sl(), loginByPhoneMethod: sl()));
   sl.registerFactory(
       () => AddUpdateGetWeightBloc(getAllWeight: sl(), logOut: sl()));
   sl.registerFactory(() => AddUpdateGetChatBloc(addSick: sl(), getSick: sl()));
@@ -41,6 +42,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => LogOutUseCases(sl()));
   sl.registerLazySingleton(() => AddMessage(sl()));
   sl.registerLazySingleton(() => GetAllMessage(sl()));
+  sl.registerLazySingleton(() => LoginByPhoneUseCases(sl()));
 
   //Repository
   sl.registerLazySingleton<LoginRepositorie>(

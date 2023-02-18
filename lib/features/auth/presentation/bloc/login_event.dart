@@ -19,6 +19,14 @@ class LoginMethodEvent extends LoginEvent {
   @override
   List<Object> get props => [login];
 }
+class LoginByPhoneMethodEvent extends LoginEvent {
+  final Login login;
+
+  LoginByPhoneMethodEvent({required this.login});
+
+  @override
+  List<Object> get props => [login];
+}
 
 class AddUserEvent extends LoginEvent {
   final Login login;

@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../ domain/usecases/create_user.dart';
+import '../../ domain/usecases/login_by_phone_usecases.dart';
 import '../../ domain/usecases/login_usecases.dart';
 import '../../ domain/usecases/vilification_phone.dart';
 import '../../../../core/error/failures.dart';
@@ -12,18 +13,25 @@ import 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final LoginUseCases loginMethod;
+  final LoginByPhoneUseCases loginByPhoneMethod;
   final CreateUseCases createUseMethod;
   final VilificationPhoneUseCases vilificationPhoneUseMethod;
 
   LoginBloc(
       {required this.loginMethod,
       required this.createUseMethod,
+      required this.loginByPhoneMethod,
       required this.vilificationPhoneUseMethod})
       : super(LoginInitial()) {
     on<LoginEvent>((event, emit) async {
       if (event is LoginMethodEvent) {
         emit(LoadingLoginState());
         final failureOrDoneMessage = await loginMethod(event.login);
+        emit(_mapFailureOrPostsToStateForAdd(
+            failureOrDoneMessage, LOGIN_SUCCESS_MESSAGE));
+      } else if (event is LoginByPhoneMethodEvent) {
+        emit(LoadingLoginState());
+        final failureOrDoneMessage = await loginByPhoneMethod(event.login);
         emit(_mapFailureOrPostsToStateForAdd(
             failureOrDoneMessage, LOGIN_SUCCESS_MESSAGE));
       } else if (event is AddUserEvent) {

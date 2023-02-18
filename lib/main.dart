@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -15,6 +16,7 @@ import 'features/home/presentation/bloc/add_weight_bloc.dart';
 import 'firebase_options.dart';
 import 'injection_container.dart' as di;
 import 'features/auth/presentation/bloc/login_bloc.dart';
+
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
   // make sure you call `initializeApp` before using other Firebase services.
@@ -23,15 +25,62 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print("Handling a background message: ${message.messageId}");
 }
 
-Future<void> main() async {
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+Future<void> messageHandler(RemoteMessage message) async {
+  print('notification from background : ${message.data}');
 
+}
+
+void firebaseMessagingListener() {
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    print('notification from foreground : ${message.data}');
+
+  });
+}
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  // print(type().action());
-  WidgetsFlutterBinding.ensureInitialized();
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp();
+  FirebaseMessaging.onBackgroundMessage(messageHandler);
+  firebaseMessagingListener();
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+  // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  final fcmToken = await FirebaseMessaging.instance.getToken();
+  print('token: ${fcmToken}');
+  await messaging.getNotificationSettings();
+  await messaging.requestPermission(
+    provisional: true,
+  );
+  NotificationSettings settings = await messaging.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
+
+  print('User granted permission: ${settings.authorizationStatus}');
+  // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+  //   print('Got a message whilst in the foreground!');
+  //   print('Message data: ${message.data}');
+  //
+  //   if (message.notification != null) {
+  //     print(
+  //         'Message also contained a notification: ${message.notification!.body}');
+  //   }
+  // });
+  // FirebaseAuth.instance.authStateChanges().listen((User? user) {
+  //   if (user == null) {
+  //     print('User is currently signed out!');
+  //   } else {
+  //     // print("token: " + user.getIdToken()..toString());
+  //     print('User is signed in!');
+  //   }
+  // });
   await di.init();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   bool? uLogin = prefs.getBool('login');
@@ -94,7 +143,8 @@ class _MyApp extends State<MyApp> with WidgetsBindingObserver {
           BlocProvider(create: (_) => di.sl<AddUpdateGetWeightBloc>()),
           BlocProvider(
             create: (_) => CheckerCubit(),
-          ),BlocProvider(
+          ),
+          BlocProvider(
             create: (_) => CheckerCubit0(''),
           ),
         ],

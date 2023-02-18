@@ -11,26 +11,30 @@ class ChatListWidget extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
       children: [
-        Expanded(
+        Container(
+          height: MediaQuery.of(context).size.height-160,
           child: ListView.builder(
+            // shrinkWrap: true,
+            // reverse: true,
             itemCount: sick.length,
             itemBuilder: (context, index) {
               return
                   Container(
-                    width:1  ,
+                    height:50  ,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30.0),
-                        topRight: Radius.circular(30.0),
+                      borderRadius: BorderRadius.all(Radius.circular(30.0),
                       ),
                       color: Colors.black12
                     ),
+
+                    padding: sick[index].you ?EdgeInsets.only(right: 10): EdgeInsets.only(left: 10),
+                    margin: sick[index].you ?EdgeInsets.only(left: MediaQuery.of(context).size.width/2): EdgeInsets.only(right: MediaQuery.of(context).size.width/2),
                     alignment:sick[index].you ?Alignment.centerRight: Alignment.centerLeft,
                     child: Text(
                       sick[index].meg.toString(),
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.green),
                     ),
                   );
