@@ -38,13 +38,17 @@ class LoginRemoteDataSourceImple extends LoginRemoteDataSource {
         throw FailuresLoginException();
       });
       // credential.user.uid
-      await FirebaseDatabase.instance.ref().update({'${credential.user!.uid}/fcmToken': fcmToken.toString()});
+      await FirebaseDatabase.instance
+          .ref()
+          .update({'${credential.user!.uid}/fcmToken': fcmToken.toString()});
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('uid', credential.user!.uid);
       prefs.setBool('login', true);
       OnlineNotOnline().changeStatusToBeOnline();
-      await FirebaseDatabase.instance.ref().update({'${credential.user!.uid}/fcmToken': fcmToken.toString()});
+      await FirebaseDatabase.instance
+          .ref()
+          .update({'${credential.user!.uid}/fcmToken': fcmToken.toString()});
       return Future.value(unit);
     } catch (e) {
       throw OfflineException();
@@ -123,34 +127,44 @@ class LoginRemoteDataSourceImple extends LoginRemoteDataSource {
 
   @override
   Future<Unit> loginByPhoneMethod(Login login) async {
-
     try {
       final fcmToken = await FirebaseMessaging.instance.getToken();
       print('token: ${fcmToken}');
       final ref = FirebaseDatabase.instance.ref();
       final snapshot = await ref.get();
       // if (snapshot.exists) {
-      Map dataOfBanks = snapshot.value as Map;
-      print("dataOfBanks: $dataOfBanks");
-      // final credential = await FirebaseAuth.instance
-      //     .signInWithEmailAndPassword(
-      //     email: login.email.toString(),
-      //     password: login.password.toString())
-      //     .onError((error, stackTrace) {
-        throw FailuresLoginException();
-      // });
-      // // credential.user.uid
-      // await FirebaseDatabase.instance.ref().update({'${credential.user!.uid}/fcmToken': fcmToken.toString()});
-      //
-      // SharedPreferences prefs = await SharedPreferences.getInstance();
-      // prefs.setString('uid', credential.user!.uid);
-      // prefs.setBool('login', true);
-      // OnlineNotOnline().changeStatusToBeOnline();
-      // await FirebaseDatabase.instance.ref().update({'${credential.user!.uid}/fcmToken': fcmToken.toString()});
-      return Future.value(unit);
+      Map data = snapshot.value as Map;
+      print('data: $data');
+      String phoneNumber = login.phoneNumber!;
+      // for(int i =0;i<data.length;i++ ){
+      //   var record = data[i].values;
+      // }
+      for (var recordAll in data.entries) {
+        print(recordAll);
+        var record = recordAll.value;
+        var recordKey = recordAll.key;
+
+        print('counter ${record['phoneNumber']}  --  $phoneNumber');
+        if (record['phoneNumber'].toString() == phoneNumber.toString()) {
+          String password = record['password'].toString();
+          if (password == login.password.toString()) {
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            prefs.setString('uid', recordKey);
+            prefs.setBool('login', true);
+            await FirebaseDatabase.instance
+                .ref()
+                .update({'$recordKey/fcmToken': fcmToken.toString()});
+            OnlineNotOnline().changeStatusToBeOnline();
+            return Future.value(unit);
+          }
+          break;
+        }
+      }
+
+      throw FailuresLoginException();
     } catch (e) {
+      print(e);
       throw OfflineException();
     }
-    throw UnimplementedError();
   }
 }

@@ -57,16 +57,16 @@ class LoginByPhoneFormWidget extends StatelessWidget {
   }
 
   void validateFormThenUpdateOrAddPost(BuildContext context) {
-    // final isValid = _formKey.currentState!.validate();
-    //
-    // if (isValid) {
+    final isValid = _formKey.currentState!.validate();
+
+    if (isValid) {
       final login = Login(
         email: '',
-        phoneNumber: '1289555089',//_phoneController.text.toString(),
-        password: '1234567890'//_passwordController.text.toString(),
+        phoneNumber: _phoneController.text.toString(),
+        password: _passwordController.text.toString(),
       );
 
       BlocProvider.of<LoginBloc>(context).add(LoginByPhoneMethodEvent(login: login));
-    // }
+    }
   }
 }
