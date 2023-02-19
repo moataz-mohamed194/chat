@@ -9,6 +9,7 @@ import '../../../../injection_container.dart' as di;
 import '../../ domain/entities/login.dart';
 import '../../../../core/widgets/ButtonWidget.dart';
 import '../../../../core/widgets/TextFormFieldWidgets.dart';
+import '../../../home/presentation/ pages/get_all_weight.dart';
 import '../../data/datasources/login_remote_date_source.dart';
 import '../bloc/login_bloc.dart';
 import '../bloc/login_event.dart';
@@ -69,6 +70,10 @@ class AuthenticationPhoneNumber extends StatelessWidget {
                                   .then((value) {
                                 BlocProvider.of<LoginBloc>(context)
                                     .add(AddUserEvent(login: login!));
+                                Navigator.of(context).pushAndRemoveUntil(
+                                    MaterialPageRoute(builder: (_) => MainUserPage()),
+                                        (route) => false);
+
                               });})
                       ]),
                 );
