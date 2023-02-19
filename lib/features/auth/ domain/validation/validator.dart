@@ -14,7 +14,7 @@ class Validator {
   }
 
   String? validatorPhoneNumber(String val) {
-    return val.isEmpty || val.contains(RegExp(r'^[0-9]{10}$')) == false
+    return val.isEmpty || val.contains(RegExp(r'^[0-9]{10,11}$')) == false
         ? "must add valid phone number"
         : null;
   }

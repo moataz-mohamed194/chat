@@ -64,23 +64,6 @@ Future<void> main() async {
   );
 
   print('User granted permission: ${settings.authorizationStatus}');
-  // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-  //   print('Got a message whilst in the foreground!');
-  //   print('Message data: ${message.data}');
-  //
-  //   if (message.notification != null) {
-  //     print(
-  //         'Message also contained a notification: ${message.notification!.body}');
-  //   }
-  // });
-  // FirebaseAuth.instance.authStateChanges().listen((User? user) {
-  //   if (user == null) {
-  //     print('User is currently signed out!');
-  //   } else {
-  //     // print("token: " + user.getIdToken()..toString());
-  //     print('User is signed in!');
-  //   }
-  // });
   await di.init();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   bool? uLogin = prefs.getBool('login');

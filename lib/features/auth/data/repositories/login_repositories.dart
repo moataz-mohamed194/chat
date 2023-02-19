@@ -52,6 +52,7 @@ class LoginRepositoriesImpl extends LoginRepositorie {
 
   @override
   Future<Either<Failures, Unit>> vilificationPhoneMethod(Login login) async {
+    print('vilificationPhoneMethod');
     final LoginMethod loginMethod = LoginMethod(
         email: login.email,
         password: login.password,

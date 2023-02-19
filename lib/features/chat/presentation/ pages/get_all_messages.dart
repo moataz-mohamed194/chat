@@ -72,7 +72,8 @@ class ChatScreen extends StatelessWidget {
                       child: ChatListWidget(sick: state.sicks, uid: uid));
                 } else if (state is ErrorState) {
                   return MessageDisplayWidget(message: state.message);
-                } else if (state is MessageAddUpdateGetState || state is LoadedState) {
+                }
+                else if (state is MessageAddUpdateGetState || state is LoadedState) {
                   return StreamBuilder(
                       stream: FirebaseDatabase.instance
                           .ref('$myId/messages/$uid').orderByKey()

@@ -104,10 +104,22 @@ class LoginRemoteDataSourceImple extends LoginRemoteDataSource {
         'phoneNumber': login.phoneNumber.toString()
       };
       FirebaseAuth auth = FirebaseAuth.instance;
-
+      print(body);
+      print(body["phoneNumber"].toString()[0]);
+      print(body["phoneNumber"].toString().substring(1));
+      String firstCharInPhone = body["phoneNumber"].toString()[0];
+      String finalPhone = '';
+      if (firstCharInPhone == '0'){
+        print(body["phoneNumber"].toString().substring(1));
+        finalPhone= body["phoneNumber"].toString().substring(1);
+      }else{
+        finalPhone = body["phoneNumber"].toString();
+      }
+      print("finalPhone: $finalPhone");
       await auth.verifyPhoneNumber(
-        phoneNumber: '+20${body["phoneNumber"]}',
+        phoneNumber: '+20${finalPhone}',
         verificationFailed: (FirebaseAuthException e) {
+          print('e: $e');
           if (e.code == 'invalid-phone-number') {
             print('The provided phone number is not valid.');
           }
@@ -119,8 +131,10 @@ class LoginRemoteDataSourceImple extends LoginRemoteDataSource {
         },
         codeAutoRetrievalTimeout: (String verificationId) {},
       );
+      print('the verification end');
       return Future.value(unit);
     } catch (e) {
+      print(e);
       throw FailuresLoginException();
     }
   }
